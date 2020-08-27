@@ -1,10 +1,10 @@
 <?php
-require 'session.php';
+	require 'session.php';
 
-if (isset($_POST['search'])) {
+	if (isset($_POST['search'])) {
 	$search = $_POST['search'];
 
-	$sql = "SELECT id,firstname,last_name,picture_link FROM google_user WHERE firstname LIKE '%$search%' OR last_name LIKE '%$search%' UNION SELECT id,firstname,last_name,picture_link FROM users WHERE firstname LIKE '%$search%' OR last_name LIKE '%$search%'";
+	$sql = "SELECT id,user_name,firstname,last_name,picture_link FROM google_user WHERE user_name LIKE '%$search%' UNION SELECT id,user_name,firstname,last_name,picture_link FROM users WHERE user_name LIKE '%$search%'";
 	$res = mysqli_query($con,$sql); 
 	$output = ' ';
 	if (mysqli_num_rows($res) > 0) {
@@ -18,7 +18,7 @@ if (isset($_POST['search'])) {
 												<img src='.$image.' alt="" style="width: 35px;height: 35px;border-radius: 50%;position:absolute;left: 10px;top: -4px;">
 											</div>	
 											<div class="col-8" >
-												<strong id="myitem" style="font-size: .8rem;letter-spacing:1px">'.$row['firstname'].' '.$row['last_name'].'</strong><br>
+												<strong id="myitem" style="font-size: .8rem;letter-spacing:1px">'.$row['user_name'].'</strong><br>
 											</div>
 										</div>
 									</div>	

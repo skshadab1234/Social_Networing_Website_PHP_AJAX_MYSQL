@@ -1,0 +1,74 @@
+<script>
+	$(document).ready(function() {
+
+		function message_unseen(message = '')
+		{
+			$.ajax({
+				url: "get_msg.php",
+				method: "post",
+				dataType: "JSON",
+				data: {message:message},
+				success: function(data){
+					$("#notication").html(data.notification);
+					$(".count").html(data.unseen_message);
+				}
+			});
+		}
+
+
+		setInterval( () => {
+			message_unseen();
+		}, 2000)
+
+		$("#search").on("keyup", function(){
+			var search = $(this).val();
+				if (search != '') {
+					$.ajax({
+					url: "search_user.php",
+					type: "post",
+					data: {search:search},
+					success: function(result){
+				        jQuery("#drop").fadeIn();
+						$("#drop").html(result);
+					}
+				});
+				}else{
+					$("#drop").fadeOut();
+					$("#drop").html("");
+				}	
+		});
+		$(document).on('click', '#myitem', function(){
+					$("#search").val(jQuery(this).text());
+					$("#drop").fadeOut();
+		}); 
+
+		$("#search").focusout( () => {
+			$("#drop").fadeOut();
+		});
+	});	
+</script>
+<script>
+	(function($) { // Begin jQuery
+  $(function() { // DOM ready
+    // If a link has a dropdown, add sub menu toggle.
+    $('nav ul li a:not(:only-child)').click(function(e) {
+      $(this).siblings('.nav-dropdown').toggle();
+      // Close one dropdown when selecting another
+      $('.nav-dropdown').not($(this).siblings()).hide();
+      e.stopPropagation();
+    });
+    // Clicking away from dropdown will remove the dropdown class
+    $('html').click(function() {
+      $('.nav-dropdown').hide();
+    });
+    // Toggle open and close nav styles on click
+    $('#nav-toggle').click(function() {
+      $('nav ul').slideToggle();
+    });
+    // Hamburger to X toggle
+    $('#nav-toggle').on('click', function() {
+      this.classList.toggle('active');
+    });
+  }); // end DOM ready
+})(jQuery); // end jQuery
+</script>

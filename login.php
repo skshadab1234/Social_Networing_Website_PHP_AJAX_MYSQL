@@ -1,12 +1,6 @@
 <?php
     require_once "session.php";
-    if (isset($_SESSION['access_token'])) {
-        header('Location: index.php');
-        exit();
-    }elseif (isset($_SESSION['USER_ID'])) {
-        header('Location: index.php');
-        exit();
-    }
+  
     $loginURL = $gClient->createAuthUrl();
     
 ?>

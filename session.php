@@ -11,4 +11,9 @@ if (isset($_SESSION['access_token'])) {
 	$sql = "SELECT * FROM users where id = '".$_SESSION['USER_ID']."'";
 	$res = mysqli_query($con,$sql);
 	$user = mysqli_fetch_assoc($res);
+}else{
+	header("location:signup.php");
 }
+
+$userimg = (!empty($user['picture_link']) ? $user['picture_link'] : "https://eruditegroup.co.nz/wp-content/uploads/2016/07/profile-dummy3.png");
+

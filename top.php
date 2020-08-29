@@ -1,3 +1,6 @@
+<?php 
+	require 'function.inc.php';
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,13 +15,14 @@
 		<!-- jQuery library -->
 		
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-
+		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.3.1/css/swiper.min.css">
 		<!-- Latest compiled JavaScript -->
 		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" ></script>
 		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+				
 		<style>
 		nav ul li a, nav ul li a:visited{
 		background-color: #fff;
@@ -29,7 +33,6 @@
 		}
 		.navigation {
 		height: 70px;
-		background: #262626;
 		}
 
 		.brand {
@@ -42,7 +45,7 @@
 		}
 		.brand a,
 		.brand a:visited {
-		color: #ffffff;
+		color: #000;
 		text-decoration: none;
 		}
 
@@ -71,8 +74,7 @@
 		display: block;
 		padding: 0 20px;
 		line-height: 70px;
-		background: #262626;
-		color: #ffffff;
+		color: #000;
 		text-decoration: none;
 		}
 		nav ul li a:hover,
@@ -106,7 +108,6 @@
 		position: absolute;
 		top: 0;
 		right: 0;
-		background: #262626;
 		height: 70px;
 		width: 70px;
 		}
@@ -166,9 +167,9 @@
 		#nav-toggle span:after {
 		cursor: pointer;
 		border-radius: 1px;
-		height: 5px;
+		height: 2px;
 		width: 35px;
-		background: #ffffff;
+		background: #000;
 		position: absolute;
 		display: block;
 		content: '';
@@ -194,7 +195,6 @@
 		}
 
 .container1	 {
-background: #262626;
 position: relative;
 line-height: 37px;
 /* top: 10px; */
@@ -258,6 +258,16 @@ padding: 10px;
   }
 }
 
+.carousel_container{
+	width: 100vw;
+	overflow-x: scroll;
+	overflow-y: hidden;
+}
+.caorusel{
+	background-color: red;
+	padding: 10px;
+	margin: 10px
+}
 </style>
 </head>
 <body>
@@ -272,26 +282,7 @@ padding: 10px;
     <nav>
       <div class="nav-mobile"><a id="nav-toggle" href="#!"><span></span></a></div>
       <ul class="nav-list">
-        
-       	<?php
-			if (isset($_SESSION['access_token']) || isset($_SESSION['USER_ID'])) {
-				echo '
-				<li>
-					<a href="#!" >Notification <span class="badge badge-secondary count"></span></a>
-					<ul class="nav-dropdown" id="notication">
-					</ul>
-				</li>
-				 <li>
-				          <a href="#!" >'.$user['firstname'].' '.$user['last_name'].'</a>
-				          <ul class="nav-dropdown">
-				          	<li><a href="logout.php">Logout</a></li>
-				          </ul>
-				       </li>';
-			}else{
-				echo "<li><a href='login.php'>Login</a></li>";
-			}
-		?>
-		<li>
+        <li>
 				<div class='container-fluid container1' >
 				  <div class='row'>
 				    <div class='col-md-12'>
@@ -310,6 +301,26 @@ padding: 10px;
 				          	<!-- <a href="logout.php" style="position: absolute;display: block;width: 100%;">Logout</a> -->
 				     </ul>
 		</li>
+       	<?php
+			if (isset($_SESSION['access_token']) || isset($_SESSION['USER_ID'])) {
+				echo '
+				<li>
+					<a href="#!" ><i class="fa fa-bell"> <span class="badge badge-danger count" style="position: absolute;top: 18px;left: 30px;width: 15px;height: 15px;border-radius: 50%;font-size: 9px;"></span></i></a>
+					<ul class="nav-dropdown" id="notication" style="right:-11px;overflow-x: hidden;height:50vh;background: #fff;
+">
+					</ul>
+				</li>
+				 <li>
+				          <a href="javascript:voide(0)" ><img src="'.$userimg.'" width="35px" height="35px" style="position:relative;top:18px;border-radius:50%"></a>
+				          <ul class="nav-dropdown" style="right:-11px">
+				          	<li><a href="logout.php">Logout</a></li>
+				          </ul>
+				       </li>';
+			}else{
+				echo "<li><a href='login.php'>Login</a></li>";
+			}
+		?>
+		
       </ul>
     </nav>
   </div>
